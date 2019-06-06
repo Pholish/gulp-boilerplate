@@ -21,18 +21,24 @@ sass.compiler = require('node-sass');
 var sass_src = './src/sass/main.scss',
 	sass_files = './src/sass/*.scss',
 	img_src = './src/assets/**/',
+	fonts_src = './src/fonts/fonts/*{ttf,woff,woff2,svg,eot}',
+	fa_fonts = 'node_modules/font-awesome/fonts/*{ttf,woff,woff2,svg,eot}',
+	roboto_fonts =
+		'node_modules/roboto-fontface/fonts/roboto/*{ttf,woff,woff2,svg,eot}',
 	html_src = './src/**/*.html',
 	js_src = './src/**/*.js',
 	dist = './dist',
 	html_dest = './dist/**/*.html',
 	assets = './dist/assets',
+	fonts = './dist/fonts',
 	build = './dist/build/',
 	temp = './dist/build/temp/',
 	js_temp = './dist/build/temp/js',
 	css_temp = './dist/build/temp/css',
 	jquery = 'node_modules/jquery/dist/jquery.min.js',
 	popperjs = 'node_modules/popper.js/dist/umd/popper.min.js',
-	bootstrap = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
+	bootstrap = 'node_modules/bootstrap/dist/js/bootstrap.min.js',
+	slickjs = 'node_modules/slick-carousel/slick/slick.min.js';
 
 // hashing task
 gulp.task('hash', function() {
@@ -83,7 +89,7 @@ gulp.task('build-sass', () => {
 // bundle dependencies js
 gulp.task('vendor-js', done => {
 	return gulp
-		.src([jquery, popperjs, bootstrap])
+		.src([jquery, popperjs, bootstrap, slickjs])
 		.pipe(concat('vendor-bundle.js'))
 		.pipe(gulp.dest(build));
 	done();
@@ -147,16 +153,33 @@ gulp.task(
 	}),
 );
 
+// build fonts
+gulp.task('build-fonts', () => {
+	return gulp.src([fa_fonts, roboto_fonts, fonts_src]).pipe(gulp.dest(fonts));
+});
+
 // build and minify
 gulp.task(
 	'build-compress',
-	gulp.parallel('build-html', 'build-sass', 'compress-js', 'optimise-img'),
+	gulp.parallel(
+		'build-html',
+		'build-fonts',
+		'build-sass',
+		'compress-js',
+		'optimise-img',
+	),
 );
 
 // build files
 gulp.task(
 	'build-all',
-	gulp.parallel('build-html', 'build-sass', 'bundle-js', 'optimise-img'),
+	gulp.parallel(
+		'build-html',
+		'build-fonts',
+		'build-sass',
+		'bundle-js',
+		'optimise-img',
+	),
 );
 
 // clean previous build

@@ -1,1 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800');
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../fonts/fontawesome-webfont.eot') format('eot'),
+		url('../fonts/fontawesome-webfont.svg') format('svg'),
+		url('../fonts/fontawesome-webfont.ttf') format('ttf'),
+		url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+		url('../fonts/fontawesome-webfont.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'RobotoBold';
+	src: url('../fonts/Roboto-Bold.woff2') format('woff2'),
+		url('../fonts/Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'RobotoLight';
+	src: url('../fonts/Roboto-Light.woff2') format('woff2'),
+		url('../fonts/Roboto-Light.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'RobotoRegular';
+	src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+		url('../fonts/Roboto-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'RobotoMedium';
+	src: url('../fonts/Roboto-Medium.woff2') format('woff2'),
+		url('../fonts/Roboto-Medium.woff') format('woff');
+}
