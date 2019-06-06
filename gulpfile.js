@@ -15,6 +15,8 @@ const pump = require('pump');
 const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
+const stripCssComments = require('gulp-strip-css-comments');
+
 sass.compiler = require('node-sass');
 
 // style paths
@@ -82,6 +84,7 @@ gulp.task('build-sass', () => {
 		.pipe(concat('style.css'))
 		.pipe(sourcemaps.write())
 		.pipe(cleanCSS({ compatibility: 'ie8' }))
+		.pipe(stripCssComments({ preserve: false }))
 		.pipe(gulp.dest(css_temp))
 		.pipe(browserSync.stream());
 });
