@@ -39,6 +39,7 @@
     "gulp-strip-css-comments": "^2.0.0",
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",
+    "reset-css": "^4.0.1",
     "roboto-fontface": "^0.10.0",
     "slick-carousel": "^1.8.1"
   },
