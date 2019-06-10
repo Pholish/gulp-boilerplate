@@ -1,5 +1,9 @@
 # gulp-boilerplate
 
+Install
+
+\$ git clone https://github.com/Pholish/gulp-boilerplate.git
+
 Gulp setup
 
 1. npm i

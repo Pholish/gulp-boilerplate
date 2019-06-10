@@ -39,8 +39,8 @@ var sass_src = './src/sass/main.scss',
 	css_temp = './dist/build/temp/css',
 	jquery = 'node_modules/jquery/dist/jquery.min.js',
 	popperjs = 'node_modules/popper.js/dist/umd/popper.min.js',
-	bootstrap = 'node_modules/bootstrap/dist/js/bootstrap.min.js',
-	slickjs = 'node_modules/slick-carousel/slick/slick.min.js';
+	select2js = 'node_modules/select2/dist/js/select2.full.min.js',
+	bootstrap = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 // hashing task
 gulp.task('hash', function() {
@@ -92,7 +92,7 @@ gulp.task('build-sass', () => {
 // bundle dependencies js
 gulp.task('vendor-js', done => {
 	return gulp
-		.src([jquery, popperjs, bootstrap, slickjs])
+		.src([jquery, popperjs, select2js, bootstrap])
 		.pipe(concat('vendor-bundle.js'))
 		.pipe(gulp.dest(build));
 	done();
