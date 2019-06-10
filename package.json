@@ -31,7 +31,8 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "node-sass": "^4.11.0",
-    "pump": "^3.0.0"
+    "pump": "^3.0.0",
+    "select2": "^4.0.7"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
