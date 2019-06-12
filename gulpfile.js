@@ -17,6 +17,7 @@ const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
 const stripCssComments = require('gulp-strip-css-comments');
 const merge = require('merge-stream');
+const strip = require('gulp-strip-comments');
 
 sass.compiler = require('node-sass');
 
@@ -101,6 +102,7 @@ gulp.task('vendor-js', done => {
 	var libsStream = gulp.src(libs_js);
 	return merge(libsStream, jsStream)
 		.pipe(concat('vendor-bundle.js'))
+		.pipe(strip())
 		.pipe(gulp.dest(build));
 	done();
 });
