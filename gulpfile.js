@@ -16,19 +16,22 @@ const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
 const stripCssComments = require('gulp-strip-css-comments');
+const merge = require('merge-stream');
 
 sass.compiler = require('node-sass');
 
 // style paths
 var sass_src = './src/sass/main.scss',
 	sass_files = './src/sass/*.scss',
+	libs_css = './src/libs/css/**/*.css',
+	libs_js = './src/libs/js/**/*.js',
 	img_src = './src/assets/**/',
 	fonts_src = './src/fonts/fonts/*{ttf,woff,woff2,svg,eot}',
 	fa_fonts = 'node_modules/font-awesome/fonts/*{ttf,woff,woff2,svg,eot}',
 	roboto_fonts =
 		'node_modules/roboto-fontface/fonts/roboto/*{ttf,woff,woff2,svg,eot}',
 	html_src = './src/**/*.html',
-	js_src = './src/**/*.js',
+	js_src = './src/scripts/*.js',
 	dist = './dist',
 	html_dest = './dist/**/*.html',
 	assets = './dist/assets',
@@ -40,6 +43,7 @@ var sass_src = './src/sass/main.scss',
 	jquery = 'node_modules/jquery/dist/jquery.min.js',
 	popperjs = 'node_modules/popper.js/dist/umd/popper.min.js',
 	select2js = 'node_modules/select2/dist/js/select2.full.min.js',
+	owlcarousel2js = 'node_modules/owl.carousel/dist/owl.carousel.js',
 	bootstrap = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 // hashing task
@@ -76,11 +80,13 @@ gulp.task(
 
 // Compile sass into CSS
 gulp.task('build-sass', () => {
-	return gulp
+	var sassStream = gulp
 		.src(sass_src)
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer())
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass().on('error', sass.logError));
+	var cssStream = gulp.src(libs_css);
+	return merge(sassStream, cssStream)
 		.pipe(concat('style.css'))
 		.pipe(sourcemaps.write())
 		.pipe(cleanCSS({ compatibility: 'ie8' }))
@@ -91,8 +97,9 @@ gulp.task('build-sass', () => {
 
 // bundle dependencies js
 gulp.task('vendor-js', done => {
-	return gulp
-		.src([jquery, popperjs, select2js, bootstrap])
+	var jsStream = gulp.src([jquery, popperjs, select2js, owlcarousel2js]);
+	var libsStream = gulp.src(libs_js);
+	return merge(libsStream, jsStream)
 		.pipe(concat('vendor-bundle.js'))
 		.pipe(gulp.dest(build));
 	done();
