@@ -1,7 +1,3 @@
-@import './node_modules/reset-css/sass/reset';
-@import './node_modules/font-awesome/scss/font-awesome';
-@import './node_modules/select2/src/scss/core.scss';
-
 @import 'fonts';
 @import 'variables';
 
@@ -27,7 +23,7 @@ html {
 body {
 	color: $color-black;
 	background: $color-white;
-	font-family: $font-family-montserrat;
+	font-family: $font-family-arial;
 }
 
 .link {
